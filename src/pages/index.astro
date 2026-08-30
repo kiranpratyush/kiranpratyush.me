@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft && data.featured))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
+const writing = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
+const longDate = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<BaseLayout>
+  <section class="intro page-shell">
+    <h1>Hi, I&apos;m Pratyush Kiran.</h1>
+    <div class="intro-profile">
+      <div class="intro-copy">
+        <p class="intro-tagline">I like making complex systems understandable.</p>
+        <p>
+          I&apos;m a backend engineer focused on systems that keep doing the right thing
+          when work is long-running, machines restart, and messages arrive more than once.
+        </p>
+        <p>
+          My day-to-day work involves backend services for remotely managing software
+          distribution to hospital devices. I work with C#, ASP.NET Core, and AWS services
+          across workflows, device communication, data processing, and reliable delivery.
+        </p>
+        <p>
+          Outside work, I go deeper into database internals, networking, distributed systems,
+          and system design. I learn best by building prototypes and documenting the reasoning
+          behind them.
+        </p>
+        <p>
+          I am also returning to electronics—this time through practical experiments rather
+          than the theory-first approach I encountered in school.
+        </p>
+      </div>
+      <aside class="intro-details" aria-label="Profile details">
+        <div>
+          <p class="project-type">Principles</p>
+          <ul>
+            <li>Make failure explicit.</li>
+            <li>Prefer understandable systems.</li>
+            <li>Measure the whole journey.</li>
+            <li>Learn one layer below.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="project-type">Currently</p>
+          <p>Software Engineer<br />Siemens Healthineers</p>
+        </div>
+      </aside>
+    </div>
+    <div class="intro-links">
+      <a href="/work">View projects <Icon name="arrow" size={15} /></a>
+      <a href="mailto:hello@kiranpratyush.me">Contact me <Icon name="external" size={14} /></a>
+    </div>
+  </section>
+
+  <div class="page-shell">
+    <section class="section">
+      <div class="section-heading">
+        <div><p class="section-kicker">01</p><h2>Projects</h2></div>
+        <a class="archive-link" href="/work">All projects <Icon name="external" size={15} /></a>
+      </div>
+      <div class="project-list">
+        {projects.map((project, index) => (
+          <a class="project-row" href={`/work/${project.id}/`}>
+            <span class="project-number">0{index + 1}</span>
+            <div class="project-main">
+              <p class="project-type">{project.data.type}</p>
+              <h3>{project.data.title}</h3>
+              <p>{project.data.summary}</p>
+            </div>
+            <div class="project-meta">
+              <span>{project.data.stack.join(' · ')}</span>
+            </div>
+            <Icon name="external" size={17} />
+          </a>
+        ))}
+        <div class="coming-soon">
+          <strong>More projects coming soon.</strong>
+          <span>I&apos;ll add them here when they are ready to share.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section recent-blogs">
+      <div class="section-heading">
+        <div><p class="section-kicker">02</p><h2>Recent blogs</h2></div>
+        <a class="archive-link" href="/writing">All writing <Icon name="external" size={15} /></a>
+      </div>
+      <div class="writing-list">
+        {writing.length > 0 ? writing.map((post) => (
+            <a class="writing-row" href={`/writing/${post.id}/`}>
+              <time datetime={post.data.publishedAt.toISOString()}>{longDate.format(post.data.publishedAt)}</time>
+              <div><h3>{post.data.title}</h3><p>{post.data.description}</p></div>
+              <Icon name="external" size={16} />
+            </a>
+          )) : (
+            <div class="coming-soon">
+              <strong>Blogs coming soon.</strong>
+              <span>I&apos;m working on the first one.</span>
+            </div>
+          )}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+
+<BaseLayout title="Projects — Pratyush Kiran" description="Projects and systems experiments by Pratyush Kiran.">
+  <div class="page-shell archive-page">
+    <header class="page-intro">
+      <p class="section-kicker">Work / {projects.length.toString().padStart(2, '0')}</p>
+      <h1 class="page-title">Projects</h1>
+      <p>Backend systems, developer tools, and electronics experiments. Each project is a way to turn an abstraction into something observable.</p>
+    </header>
+    <div class="project-grid">
+      {projects.map((project, index) => (
+        <a href={`/work/${project.id}/`} class="project-card">
+          <div class="card-top"><span>0{index + 1}</span><Icon name="external" size={17} /></div>
+          <p class="project-type">{project.data.type}</p>
+          <h2>{project.data.title}</h2>
+          <p>{project.data.summary}</p>
+          <div class="card-meta"><span>{project.data.stack.join(' · ')}</span></div>
+        </a>
+      ))}
+    </div>
+    <div class="coming-soon">
+      <strong>More projects coming soon.</strong>
+      <span>New work will appear here when it is ready to share.</span>
+    </div>
+  </div>
+</BaseLayout>

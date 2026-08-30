@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro';
+
+const pathname = Astro.url.pathname;
+const links = [
+  ['/work', 'Projects'],
+  ['/writing', 'Blogs'],
+  ['/log', 'Log'],
+  ['/now', 'Now'],
+];
+---
+
+<header class="site-header">
+  <a class="wordmark" href="/" aria-label="Pratyush Kiran, home">Pratyush Kiran</a>
+  <nav aria-label="Primary navigation">
+    {links.map(([href, label]) => <a href={href} aria-current={pathname.startsWith(href) ? 'page' : undefined}>{label}</a>)}
+  </nav>
+  <div class="header-actions">
+    <a class="contact-link" href="mailto:hello@kiranpratyush.me">Let&apos;s talk</a>
+    <button class="theme-toggle" type="button" aria-label="Switch color theme" data-theme-toggle>
+      <span class="moon"><Icon name="moon" size={16} /></span>
+      <span class="sun"><Icon name="sun" size={16} /></span>
+    </button>
+  </div>
+</header>
+
+<script is:inline>
+  const button = document.querySelector('[data-theme-toggle]');
+  button?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>

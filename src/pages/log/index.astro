@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = (await getCollection('logs', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const date = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+
+<BaseLayout title="Daily Log — Pratyush Kiran" description="A curated journal about engineering, learning, life, and electronics.">
+  <div class="page-shell archive-page narrow-archive">
+    <header class="page-intro">
+      <p class="section-kicker">Daily log / {entries.length.toString().padStart(2, '0')}</p>
+      <h1 class="page-title">Daily log</h1>
+      <p>Observations from work, learning, life, and the occasional circuit. Written regularly and published selectively.</p>
+    </header>
+    <div class="log-timeline">
+      {entries.map((entry) => (
+        <a href={`/log/${entry.id}/`}>
+          <time>{date.format(entry.data.publishedAt)}</time>
+          <div><h2>{entry.data.title}</h2><p>{entry.data.summary}</p><span>{entry.data.themes.join(' · ')}</span></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

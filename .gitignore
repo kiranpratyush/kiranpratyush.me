@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/.pnpm-store
 /.pnp
 .pnp.js
 
@@ -14,6 +15,8 @@
 
 # production
 /build
+/dist
+/.astro
 
 # misc
 .DS_Store
@@ -34,3 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# astro
+.astro
