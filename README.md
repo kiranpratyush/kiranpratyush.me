@@ -1,4 +1,4 @@
-# kiranpratyush.me
+# pratyushkiran.me
 
 My personal portfolio, writing archive, and public work log. Built with Astro and Markdown content collections.
 
