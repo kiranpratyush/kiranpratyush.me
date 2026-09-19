@@ -148,6 +148,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .prose code { padding: 2px 5px; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; font-size: .84em; }
 .prose pre { overflow-x: auto; padding: 20px; border-radius: 4px; }
 .prose pre code { padding: 0; background: transparent; border: 0; border-radius: 0; font-size: inherit; }
+.prose img { display: block; width: 100%; height: auto; margin: 34px 0; border: 1px solid var(--border); border-radius: 4px; }
 .prose table { display: block; width: 100%; margin: 22px 0 34px; overflow-x: auto; border-collapse: collapse; font-size: .88rem; }
 .prose th, .prose td { min-width: 120px; padding: 11px 14px; text-align: left; border: 1px solid var(--border); }
 .prose th { color: var(--foreground); background: var(--surface); font-weight: 650; }
