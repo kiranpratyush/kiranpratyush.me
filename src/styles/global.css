@@ -85,8 +85,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-row > svg { margin-top: 6px; color: var(--muted); }
 
 .writing-list { border-bottom: 1px solid var(--border); }
-.writing-row { display: grid; grid-template-columns: 135px 1fr 24px; align-items: center; gap: 25px; padding: 27px 8px; border-top: 1px solid var(--border); transition: padding .18s ease, background .18s ease; }
-.writing-row:hover { padding-inline: 16px; background: var(--surface); }
+.writing-row { display: grid; grid-template-columns: 135px 1fr 24px; align-items: center; gap: 25px; padding: 27px 8px; border-top: 1px solid var(--border); transition: background .18s ease; }
+.writing-row:hover { background: var(--surface); }
 .writing-row time { color: var(--muted); font-size: .72rem; }
 .writing-row h3 { margin: 0; font-size: 1rem; letter-spacing: -.01em; }
 .writing-row p { margin: 3px 0 0; color: var(--muted); font-size: .78rem; }
@@ -113,8 +113,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-card > p:not(.project-type) { margin: 0; color: var(--muted); font-size: .86rem; }
 .card-meta { display: flex; align-items: center; gap: 16px; margin-top: auto; padding-top: 30px; color: var(--muted); font-size: .68rem; }
 .archive-list { border-top: 1px solid var(--border); }
-.archive-list > a { display: grid; grid-template-columns: 55px 1fr 22px; gap: 25px; padding: 34px 5px; border-bottom: 1px solid var(--border); transition: padding .18s ease, background .18s ease; }
-.archive-list > a:hover { padding-inline: 15px; background: var(--surface); }
+.archive-list > a { display: grid; grid-template-columns: 55px 1fr 22px; gap: 25px; padding: 34px 5px; border-bottom: 1px solid var(--border); transition: background .18s ease; }
+.archive-list > a:hover { background: var(--surface); }
+.writing-row h3, .archive-list > a h2 { transition: color .18s ease; }
+.writing-row:hover h3, .archive-list > a:hover h2 { color: var(--accent); }
+.writing-row > svg, .archive-list > a > svg { transition: transform .18s ease, color .18s ease; }
+.writing-row:hover > svg, .archive-list > a:hover > svg { color: var(--accent); transform: translate(2px, -2px); }
 .archive-index { color: var(--muted); font-family: 'Newsreader Variable', serif; font-size: .72rem; font-style: italic; }
 .archive-list time, .archive-list small { color: var(--muted); font-size: .68rem; }
 .archive-list h2 { margin: 4px 0 6px; font-family: 'Newsreader Variable', serif; font-size: 1.55rem; font-weight: 520; letter-spacing: -.025em; }
