@@ -29,15 +29,4 @@ const writing = defineCollection({
   }),
 });
 
-const logs = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/logs' }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    publishedAt: z.coerce.date(),
-    themes: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
-  }),
-});
-
-export const collections = { projects, writing, logs };
+export const collections = { projects, writing };

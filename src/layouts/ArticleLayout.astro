@@ -19,7 +19,7 @@ const date = publishedAt && new Intl.DateTimeFormat('en', { dateStyle: 'long' })
 <BaseLayout title={`${title} — Pratyush Kiran`} description={description}>
   <article class="article page-shell">
     <header class="article-header">
-      <a class="back-link" href={label === 'Project' ? '/work' : label === 'Journal' ? '/log' : '/writing'}>← Back to {label === 'Project' ? 'work' : label === 'Journal' ? 'log' : 'writing'}</a>
+      <a class="back-link" href={label === 'Project' ? '/work' : '/writing'}>← Back to {label === 'Project' ? 'work' : 'writing'}</a>
       <p class="section-kicker">{label}{date ? ` · ${date}` : ''}</p>
       <h1>{title}</h1>
       <p class="article-deck">{description}</p>
